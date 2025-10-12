@@ -17,7 +17,7 @@ Hỗ trợ danh sách lồng nhiều lớp.
 
 ## Build
 Đã pass: **538/538** testcases.  
-Hỗ trợ: .NET Standard 2.0
+Phiên bản: **.NET Standard 2.0**  
 
 ## Đây là một số tests theo nhu cầu thực tế đã pass
 

@@ -21,7 +21,7 @@ Supports multi-level nested lists.
 ## Build
 
 Passed: **538/538** test cases.  
-Support: **.NET Standard 2.0**  
+Version: **.NET Standard 2.0**  
 
 -----
 
