@@ -1,0 +1,174 @@
+﻿using BinaryContainer2.Container;
+using BinaryContainer2.Operators;
+using BinaryContainer2.Others;
+
+namespace BinaryContainer2.Tests.OperatorsTests
+{
+	[TestClass]
+	public class TypeArray_Decimal_Tests // Test cho mảng decimal[]
+	{
+		private TypeArray _typeArrayOperator;
+		private RefPool _refPool;
+		private Random _random;
+
+		[TestInitialize]
+		public void Setup()
+		{
+			// Khởi tạo với kiểu phần tử decimal[]
+			_typeArrayOperator = new TypeArray(typeof(decimal[]));
+			_typeArrayOperator.Build();
+			_refPool = new RefPool();
+			_random = new Random(42);
+		}
+
+		// --- Phương thức tiện ích để so sánh mảng decimal ---
+		private void AssertArrayEqual(decimal[] expected, Array actual, string message)
+		{
+			Assert.IsNotNull(actual, $"Mảng đọc ra không được là NULL: {message}");
+			Assert.AreEqual(expected.Length, actual.Length, $"Độ dài mảng không khớp: {message}");
+			Assert.IsInstanceOfType(actual, typeof(decimal[]), "Kiểu đọc ra phải là decimal[].");
+
+			for (int i = 0; i < expected.Length; i++)
+			{
+				// Decimal không bị lỗi dấu chấm động nên có thể so sánh trực tiếp
+				Assert.AreEqual(expected[i], actual.GetValue(i), $"Phần tử thứ {i} không khớp: {message}");
+			}
+		}
+
+		/// <summary>
+		/// Phương thức tiện ích để tạo decimal ngẫu nhiên trong một dải nhất định
+		/// </summary>
+		private decimal GetRandomDecimal(decimal minValue, decimal maxValue)
+		{
+			// Decimal được tạo từ 4 số nguyên 32-bit.
+			// Cách đơn giản để tạo ngẫu nhiên trong C# là dùng Random.Next() và ép kiểu.
+			// Đây là cách đơn giản để tạo số ngẫu nhiên không quá lớn cho mục đích test
+			// (Tránh tạo số có 28 chữ số ngẫu nhiên quá mức cần thiết)
+			double randomDouble = (_random.NextDouble() * (double)(maxValue - minValue)) + (double)minValue;
+			// Thêm một số chữ số thập phân ngẫu nhiên
+			int scale = _random.Next(0, 28);
+			randomDouble += (_random.NextDouble() * Math.Pow(10, -scale));
+
+			// Ép kiểu ngược lại
+			return (decimal)randomDouble;
+		}
+
+		// --- I. Các Test Case Cơ Bản ---
+
+		/// <summary>
+		/// Test case cho một mảng decimal[] điển hình với các giá trị có độ chính xác cao.
+		/// </summary>
+		[TestMethod]
+		public void WriteRead_TypicalDecimalArray_ShouldReturnCorrectValue()
+		{
+			// 1. Chuẩn bị data: decimal[] (kiểm tra độ chính xác sau dấu phẩy)
+			decimal[] originalArray = new decimal[] { 123.456789M, -987654321.01M, 0.0000000000001M };
+			object originalData = originalArray;
+			var originalContainer = new DataContainer();
+
+			// 2. Write, Export, Import
+			_typeArrayOperator.Write(originalContainer, originalData, _refPool);
+			byte[] exportedBytes = originalContainer.Export();
+			var newContainer = new DataContainer();
+			newContainer.Import(exportedBytes);
+
+			// 3. Read
+			Array? readArray = (Array?)_typeArrayOperator.Read(newContainer, _refPool);
+
+			// 4. Kiểm tra
+			AssertArrayEqual(originalArray, readArray!, "Mảng decimal[] điển hình.");
+		}
+
+		/// <summary>
+		/// Test case cho giá trị NULL (Mảng là NULL).
+		/// </summary>
+		[TestMethod]
+		public void WriteRead_NullArray_ShouldReturnNull()
+		{
+			object? originalData = null;
+			var originalContainer = new DataContainer();
+
+			_typeArrayOperator.Write(originalContainer, originalData, _refPool);
+			byte[] exportedBytes = originalContainer.Export();
+			var newContainer = new DataContainer();
+			newContainer.Import(exportedBytes);
+
+			object? readData = _typeArrayOperator.Read(newContainer, _refPool);
+			Assert.IsNull(readData, "Dữ liệu đọc ra phải là NULL.");
+		}
+
+		// --- II. Giá Trị Biên (Edge Cases) ---
+
+		/// <summary>
+		/// Giá trị biên: Mảng Rỗng (decimal[] có 0 phần tử).
+		/// </summary>
+		[TestMethod]
+		public void WriteRead_EmptyArray_ShouldReturnEmptyArray()
+		{
+			decimal[] originalArray = new decimal[0];
+			object originalData = originalArray;
+			var originalContainer = new DataContainer();
+
+			_typeArrayOperator.Write(originalContainer, originalData, _refPool);
+			byte[] exportedBytes = originalContainer.Export();
+			var newContainer = new DataContainer();
+			newContainer.Import(exportedBytes);
+
+			Array? readArray = (Array?)_typeArrayOperator.Read(newContainer, _refPool);
+
+			Assert.IsNotNull(readArray);
+			Assert.AreEqual(0, readArray.Length, "Mảng rỗng phải được đọc ra là mảng có độ dài 0.");
+		}
+
+		/// <summary>
+		/// Test mảng chứa các giá trị biên của kiểu phần tử (Min, Max, Zero).
+		/// </summary>
+		[TestMethod]
+		public void WriteRead_DecimalEdgeValuesArray_ShouldBePreserved()
+		{
+			decimal[] originalArray = new decimal[] { decimal.MinValue, decimal.Zero, decimal.MaxValue, 123456789012345678901234567M };
+			object originalData = originalArray;
+			var originalContainer = new DataContainer();
+
+			_typeArrayOperator.Write(originalContainer, originalData, _refPool);
+			byte[] exportedBytes = originalContainer.Export();
+			var newContainer = new DataContainer();
+			newContainer.Import(exportedBytes);
+
+			Array? readArray = (Array?)_typeArrayOperator.Read(newContainer, _refPool);
+			AssertArrayEqual(originalArray, readArray!, "Mảng chứa giá trị biên của Decimal.");
+		}
+
+		// --- III. Giá Trị Ngẫu Nhiên (Stress Testing) ---
+
+		/// <summary>
+		/// Stress Test: Write/Read một mảng lớn với các giá trị decimal ngẫu nhiên.
+		/// </summary>
+		[TestMethod]
+		public void WriteRead_LargeRandomDecimalArray_ShouldBeStable()
+		{
+			const int arrayLength = 1000;
+			decimal[] originalArray = new decimal[arrayLength];
+
+			// 1. Tạo mảng ngẫu nhiên
+			for (int i = 0; i < arrayLength; i++)
+			{
+				originalArray[i] = GetRandomDecimal(-1000000m, 1000000m);
+			}
+			object originalData = originalArray;
+			var originalContainer = new DataContainer();
+
+			// 2. Write, Export, Import
+			_typeArrayOperator.Write(originalContainer, originalData, _refPool);
+			byte[] exportedBytes = originalContainer.Export();
+			var newContainer = new DataContainer();
+			newContainer.Import(exportedBytes);
+
+			// 3. Read
+			Array? readArray = (Array?)_typeArrayOperator.Read(newContainer, _refPool);
+
+			// 4. Kiểm tra
+			AssertArrayEqual(originalArray, readArray!, $"Mảng ngẫu nhiên lớn ({arrayLength} phần tử) kiểu Decimal.");
+		}
+	}
+}

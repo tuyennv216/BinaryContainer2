@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<LangVersion>12.0</LangVersion>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Container\DataContainer.cs~RF18b2190.TMP" />
+    <None Remove="Operators\TypeInt32.cs~RF30f0c92.TMP" />
+    <None Remove="Operators\TypeLikeArray.cs~RF1c1e6be.TMP" />
+  </ItemGroup>
+
+</Project>
