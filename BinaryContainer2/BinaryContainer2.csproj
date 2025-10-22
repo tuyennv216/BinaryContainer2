@@ -17,10 +17,11 @@
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<RepositoryUrl>https://github.com/tuyennv216/BinaryContainer2</RepositoryUrl>
+	<Version>1.0.1</Version>
   </PropertyGroup>
   
   <ItemGroup>
-	<None Include="..\LICENSE.txt" Pack="true" PackagePath="\"/>
+	<None Include="..\LICENSE.txt" Pack="true" PackagePath="\" />
   </ItemGroup>
   
   <ItemGroup>
