@@ -74,15 +74,22 @@ namespace BinaryContainer2.Operators
 
 			if (data != null)
 			{
-				if (refPool.Write(container, data)) return;
-
-				refPool.AddObject(data);
+				if (container.Settings.Is(Settings.Using_RefPool, true))
+				{
+					if (refPool.Write(container, data)) return;
+				}
 
 				var dataType = data.GetType();
 				var sameType = Raw == dataType;
 				container.Flags.Add(sameType);
+
 				if (sameType)
 				{
+					if (container.Settings.Is(Settings.Using_RefPool, true))
+					{
+						refPool.AddObject(data);
+					}
+
 					for (var i = 0; i < Follows!.Count; i++)
 					{
 						var value = Bindings![i].GetValue!(data);
@@ -94,6 +101,11 @@ namespace BinaryContainer2.Operators
 					var typeStr = dataType.AssemblyQualifiedName;
 					var strOp = TypeOperators.Instance.GetOperator<string>();
 					strOp.Write(container, typeStr, refPool);
+
+					if (container.Settings.Is(Settings.Using_RefPool, true))
+					{
+						refPool.AddObject(data);
+					}
 
 					var op = (TypeClass)TypeOperators.Instance.GetOperator(dataType);
 					for (var i = 0; i < op.Follows!.Count; i++)
@@ -112,14 +124,21 @@ namespace BinaryContainer2.Operators
 			var isnull = container.Flags.Read();
 			if (isnull == true) return null;
 
-			var refObject = refPool.Read(container);
-			if (refObject != null) return refObject;
+			if (container.Settings.Is(Settings.Using_RefPool, true))
+			{
+				var refObject = refPool.Read(container);
+				if (refObject != null) return refObject;
+			}
 
 			var sameType = container.Flags.Read();
 			if (sameType == true)
 			{
 				var customClass = Activator.CreateInstance(Raw);
-				refPool.AddObject(customClass);
+
+				if (container.Settings.Is(Settings.Using_RefPool, true))
+				{
+					refPool.AddObject(customClass);
+				}
 
 				for (var i = 0; i < Follows!.Count; i++)
 				{
@@ -136,6 +155,11 @@ namespace BinaryContainer2.Operators
 
 				var customClass = Activator.CreateInstance(dataType);
 
+				if (container.Settings.Is(Settings.Using_RefPool, true))
+				{
+					refPool.AddObject(customClass);
+				}
+
 				var op = (TypeClass)TypeOperators.Instance.GetOperator(dataType);
 
 				for (var i = 0; i < op.Follows!.Count; i++)
@@ -144,7 +168,6 @@ namespace BinaryContainer2.Operators
 					op.Bindings![i].SetValue!(customClass, value!);
 				}
 
-				refPool.AddObject(customClass);
 				return customClass;
 			}
 		}

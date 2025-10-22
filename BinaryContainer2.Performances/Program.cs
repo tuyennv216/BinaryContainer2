@@ -1,8 +1,8 @@
 ﻿using BenchmarkDotNet.Running;
-using BinaryContainer.Performances.Converter.DataConvertClass;
+using BinaryContainer.Performances.Converter.NoRefPool;
 using BinaryContainer.Performances.Sizes;
 
-//var summary1 = BenchmarkRunner.Run<GetBytesBenchmark>();
-//var summary2 = BenchmarkRunner.Run<GetItemBenchmark>();
+var summary1 = BenchmarkRunner.Run<GetBytesNoRefPoolBenchmark>();
+var summary2 = BenchmarkRunner.Run<GetItemNoRefPoolBenchmark>();
 
-new GetBytes_OutputSizes().Run();
+//new GetBytesNoRefPool_OutputSizes().Run();

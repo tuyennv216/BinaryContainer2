@@ -1,14 +1,14 @@
-﻿using BinaryContainer.Performances.Converter.DataConvertClass;
+﻿using BinaryContainer.Performances.Converter.NoRefPool;
 
 namespace BinaryContainer.Performances.Sizes
 {
-	internal class GetBytes_OutputSizes
+	internal class GetBytesNoRefPool_OutputSizes
 	{
 	
 		private static string RowFornat = "|{0,-25}|{1,-15}|{2,-10}|{3,9}|   {4,1}   |{5,-15}|{6,-10}|{7,9}";
 		private static string SeparatorFormat = RowFornat.Replace(' ', '-');
 
-		private GetBytesBenchmark benchmark = new();
+		private GetBytesNoRefPoolBenchmark benchmark = new();
 
 		public void Run()
 		{

@@ -8,6 +8,8 @@ namespace BinaryContainer2.Others
 		Has_Flags = 1 << 0,
 		Has_Items = 1 << 1,
 		Has_Arrays = 1 << 2,
+		Using_RefPool = 1 << 3,
+		Is_Root_Null = 1 << 4,
 	}
 
 	public static class SettingsExtensions

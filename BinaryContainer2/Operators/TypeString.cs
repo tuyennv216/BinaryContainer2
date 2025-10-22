@@ -35,7 +35,11 @@ namespace BinaryContainer2.Operators
 
 			if (value != string.Empty)
 			{
-				if (refPool.Write(container, data)) return;
+				if (container.Settings.Is(Settings.Using_RefPool, true))
+				{
+					if (refPool.Write(container, data)) return;
+					refPool.AddObject(data);
+				}
 
 				// 3. Chuyển chuỗi thành byte
 				var bytes = Encoding.GetBytes(value);
@@ -58,8 +62,11 @@ namespace BinaryContainer2.Operators
 			var isempty = container.Flags.Read();
 			if (isempty == true) return string.Empty;
 
-			var refObject = refPool.Read(container);
-			if (refObject != null) return refObject;
+			if (container.Settings.Is(Settings.Using_RefPool, true))
+			{
+				var refObject = refPool.Read(container);
+				if (refObject != null) return refObject;
+			}
 
 			// 3. Lấy độ dài (Length)
 			var length = container.ReadNumber();
@@ -69,6 +76,12 @@ namespace BinaryContainer2.Operators
 
 			// 5. Chuyển mảng byte ngược lại thành chuỗi
 			var value = Encoding.GetString(stringBytes!);
+
+			if (container.Settings.Is(Settings.Using_RefPool, true))
+			{
+				refPool.AddObject(value);
+			}
+
 			return value;
 		}
 	}

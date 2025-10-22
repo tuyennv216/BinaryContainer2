@@ -37,9 +37,11 @@ namespace BinaryContainer2.Operators
 			container.Flags.Add(data == null);
 			if (data != null)
 			{
-				if (refPool.Write(container, data)) return;
-
-				refPool.AddObject(data);
+				if (container.Settings.Is(Settings.Using_RefPool, true))
+				{
+					if (refPool.Write(container, data)) return;
+					refPool.AddObject(data);
+				}
 
 				var dictionary = (IDictionary)data;
 
@@ -68,12 +70,19 @@ namespace BinaryContainer2.Operators
 			var isnull = container.Flags.Read();
 			if (isnull == true) return null;
 
-			var refObject = refPool.Read(container);
-			if (refObject != null) return refObject;
+			if (container.Settings.Is(Settings.Using_RefPool, true))
+			{
+				var refObject = refPool.Read(container);
+				if (refObject != null) return refObject;
+			}
 
 			var sortedListType = typeof(SortedList<,>).MakeGenericType(Follows![0].Raw, Follows![1].Raw);
 			var sortedList = (IDictionary)Activator.CreateInstance(sortedListType);
-			refPool.AddObject(sortedList);
+
+			if (container.Settings.Is(Settings.Using_RefPool, true))
+			{
+				refPool.AddObject(sortedList);
+			}
 
 			var isempty = container.Flags.Read();
 			if (isempty == true) return sortedList;

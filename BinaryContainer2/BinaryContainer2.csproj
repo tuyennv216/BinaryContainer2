@@ -6,10 +6,28 @@
 	<Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<Title>Binary Container 2</Title>
+	<Description>Binary Serializer</Description>
+	<Copyright>2025 @ Tuyennv216</Copyright>
+	<PackageProjectUrl>https://github.com/tuyennv216/BinaryContainer2</PackageProjectUrl>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<RepositoryUrl>https://github.com/tuyennv216/BinaryContainer2</RepositoryUrl>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <None Remove="Container\DataContainer.cs~RF18b2190.TMP" />
-    <None Remove="Operators\TypeInt32.cs~RF30f0c92.TMP" />
-    <None Remove="Operators\TypeLikeArray.cs~RF1c1e6be.TMP" />
+	<None Include="..\LICENSE.txt" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

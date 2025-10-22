@@ -4,10 +4,10 @@ using BinaryContainer2.Converter;
 using Bogus;
 using System.Text.Json;
 
-namespace BinaryContainer.Performances.Converter.DataConvertClass;
+namespace BinaryContainer.Performances.Converter.NoRefPool;
 
 [MemoryDiagnoser]
-public class GetItemBenchmark
+public class GetItemNoRefPoolBenchmark
 {
 	private readonly Faker _faker;
 
@@ -21,7 +21,7 @@ public class GetItemBenchmark
 	private BenchmarkItem<PrimitiveTypes> _primitiveTypes_item;
 	private BenchmarkItem<int[]> _primitiveTypeList_item;
 
-	public GetItemBenchmark()
+	public GetItemNoRefPoolBenchmark()
 	{
 		_faker = new Faker();
 	}
@@ -42,7 +42,7 @@ public class GetItemBenchmark
 		_simpleObject_item = new BenchmarkItem<SimpleClass>
 		{
 			Source = simpleObject,
-			BinaryBytes = BinConverter.GetBytes(simpleObject),
+			BinaryBytes = BinConverter.GetBytes(simpleObject, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(simpleObject),
 		};
 
@@ -67,7 +67,7 @@ public class GetItemBenchmark
 		_complexObject_item = new BenchmarkItem<ComplexClass>
 		{
 			Source = complexObject,
-			BinaryBytes = BinConverter.GetBytes(complexObject),
+			BinaryBytes = BinConverter.GetBytes(complexObject, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(complexObject),
 		};
 
@@ -87,7 +87,7 @@ public class GetItemBenchmark
 		_simpleList_item = new BenchmarkItem<List<SimpleClass>>
 		{
 			Source = simpleList,
-			BinaryBytes = BinConverter.GetBytes(simpleList),
+			BinaryBytes = BinConverter.GetBytes(simpleList, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(simpleList),
 		};
 
@@ -116,7 +116,7 @@ public class GetItemBenchmark
 		_complexList_item = new BenchmarkItem<List<ComplexClass>>
 		{
 			Source = complexList,
-			BinaryBytes = BinConverter.GetBytes(complexList),
+			BinaryBytes = BinConverter.GetBytes(complexList, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(complexList),
 		};
 
@@ -136,7 +136,7 @@ public class GetItemBenchmark
 		_dictionary_item = new BenchmarkItem<Dictionary<string, SimpleClass>>
 		{
 			Source = dictionary,
-			BinaryBytes = BinConverter.GetBytes(dictionary),
+			BinaryBytes = BinConverter.GetBytes(dictionary, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(dictionary),
 		};
 
@@ -144,7 +144,7 @@ public class GetItemBenchmark
 		_null_item = new BenchmarkItem<object?>
 		{
 			Source = nullVariable,
-			BinaryBytes = BinConverter.GetBytes(_null_item),
+			BinaryBytes = BinConverter.GetBytes(_null_item, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(_null_item),
 		};
 
@@ -152,7 +152,7 @@ public class GetItemBenchmark
 		_string_item = new BenchmarkItem<string>
 		{
 			Source = largeString,
-			BinaryBytes = BinConverter.GetBytes(largeString),
+			BinaryBytes = BinConverter.GetBytes(largeString, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(largeString),
 		};
 
@@ -169,7 +169,7 @@ public class GetItemBenchmark
 		_primitiveTypes_item = new BenchmarkItem<PrimitiveTypes>
 		{
 			Source = primitiveTypes,
-			BinaryBytes = BinConverter.GetBytes(primitiveTypes),
+			BinaryBytes = BinConverter.GetBytes(primitiveTypes, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(primitiveTypes),
 		};
 
@@ -181,61 +181,61 @@ public class GetItemBenchmark
 		_primitiveTypeList_item = new BenchmarkItem<int[]>
 		{
 			Source = arrayOfPrimitiveTypes,
-			BinaryBytes = BinConverter.GetBytes(arrayOfPrimitiveTypes),
+			BinaryBytes = BinConverter.GetBytes(arrayOfPrimitiveTypes, false),
 			JsonBytes = JsonSerializer.SerializeToUtf8Bytes(arrayOfPrimitiveTypes),
 		};
 	}
 
 	[Benchmark]
-	public object? GetItem_SimpleObject() => BinConverter.GetItem<SimpleClass>(_simpleObject_item.BinaryBytes);
+	public object? GetItem_SimpleObject() => BinConverter.GetItem<SimpleClass>(_simpleObject_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_SimpleObject() => JsonSerializer.Deserialize<SimpleClass>(_simpleObject_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_ComplexObject() => BinConverter.GetItem<ComplexClass>(_complexObject_item.BinaryBytes);
+	public object? GetItem_ComplexObject() => BinConverter.GetItem<ComplexClass>(_complexObject_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_ComplexObject() => JsonSerializer.Deserialize<ComplexClass>(_complexObject_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_SimpleList() => BinConverter.GetItem<List<SimpleClass>>(_simpleList_item.BinaryBytes);
+	public object? GetItem_SimpleList() => BinConverter.GetItem<List<SimpleClass>>(_simpleList_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_SimpleList() => JsonSerializer.Deserialize<List<SimpleClass>>(_simpleList_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_ComplexList() => BinConverter.GetItem<List<ComplexClass>>(_complexList_item.BinaryBytes);
+	public object? GetItem_ComplexList() => BinConverter.GetItem<List<ComplexClass>>(_complexList_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_ComplexList() => JsonSerializer.Deserialize<List<ComplexClass>>(_complexList_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_Dictionary() => BinConverter.GetItem<Dictionary<string, SimpleClass>>(_dictionary_item.BinaryBytes);
+	public object? GetItem_Dictionary() => BinConverter.GetItem<Dictionary<string, SimpleClass>>(_dictionary_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_Dictionary() => JsonSerializer.Deserialize<Dictionary<string, SimpleClass>>(_dictionary_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_Null() => BinConverter.GetItem<object?>(_null_item.BinaryBytes);
+	public object? GetItem_Null() => BinConverter.GetItem<object?>(_null_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_Null() => JsonSerializer.Deserialize<object?>(_null_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_LargeString() => BinConverter.GetItem<string>(_string_item.BinaryBytes);
+	public object? GetItem_LargeString() => BinConverter.GetItem<string>(_string_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_LargeString() => JsonSerializer.Deserialize<string>(_string_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_PrimitiveTypes() => BinConverter.GetItem<PrimitiveTypes>(_primitiveTypes_item.BinaryBytes);
+	public object? GetItem_PrimitiveTypes() => BinConverter.GetItem<PrimitiveTypes>(_primitiveTypes_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_PrimitiveTypes() => JsonSerializer.Deserialize<PrimitiveTypes>(_primitiveTypes_item.JsonBytes);
 
 	[Benchmark]
-	public object? GetItem_ArrayOfPrimitives() => BinConverter.GetItem<int[]>(_primitiveTypeList_item.BinaryBytes);
+	public object? GetItem_ArrayOfPrimitives() => BinConverter.GetItem<int[]>(_primitiveTypeList_item.BinaryBytes, false);
 
 	[Benchmark]
 	public object? JsonDeserialize_ArrayOfPrimitives() => JsonSerializer.Deserialize<int[]>(_primitiveTypeList_item.JsonBytes);

@@ -90,60 +90,60 @@ var item = BinConverter.GetItem<ItemType>(bin);
 
 ### Get bytes
 
-| Method | Mean | Error | StdDev | Gen0 | Gen1 | Allocated |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| GetBytes\_SimpleObject | 989.66 ns | 18.805 ns | 20.121 ns | 0.4101 | 0.0019 | 3440 B |
-| JsonSerializer\_SimpleObject | 416.58 ns | 5.720 ns | 5.070 ns | 0.0181 | - | 152 B |
-| GetBytes\_ComplexObject | 2,691.08 ns | 53.280 ns | 61.357 ns | 0.7248 | 0.0038 | 6080 B |
-| JsonSerializer\_ComplexObject | 1,025.01 ns | 20.289 ns | 25.660 ns | 0.0744 | - | 632 B |
-| GetBytes\_SimpleList | 54,182.62 ns | 1,039.368 ns | 972.225 ns | 12.4512 | 0.0610 | 104544 B |
-| JsonSerializer\_SimpleList | 42,330.42 ns | 137.116 ns | 107.051 ns | 1.5869 | - | 13760 B |
-| GetBytes\_ComplexList | 110,954.01 ns | 2,053.677 ns | 1,714.913 ns | 22.5830 | 3.1738 | 189440 B |
-| JsonSerializer\_ComplexList | 47,977.19 ns | 376.641 ns | 333.883 ns | 1.7700 | - | 15288 B |
-| GetBytes\_Dictionary | 13,002.12 ns | 182.236 ns | 152.175 ns | 2.9755 | 0.0610 | 24952 B |
-| JsonSerializer\_Dictionary | 8,554.34 ns | 169.212 ns | 201.435 ns | 0.3662 | - | 3096 B |
-| GetBytes\_Null | 364.16 ns | 5.844 ns | 6.253 ns | 0.2770 | 0.0019 | 2320 B |
-| JsonSerializer\_Null | 87.74 ns | 0.438 ns | 0.388 ns | 0.0038 | - | 32 B |
-| GetBytes\_PrimitiveTypes | 1,035.93 ns | 7.412 ns | 7.280 ns | 0.4234 | 0.0019 | 3544 B |
-| JsonSerializer\_PrimitiveTypes | 676.49 ns | 8.886 ns | 7.420 ns | 0.0324 | - | 272 B |
-| GetBytes\_LargeString | 2,228.34 ns | 20.555 ns | 18.221 ns | 1.6785 | 0.0267 | 14040 B |
-| JsonSerializer\_LargeString | 2,857.74 ns | 57.059 ns | 109.933 ns | 0.2556 | - | 2144 B |
-| GetBytes\_ArrayOfPrimitives | 79,907.28 ns | 988.545 ns | 876.320 ns | 10.6201 | 0.2441 | 89024 B |
-| JsonSerializer\_ArrayOfPrimitives | 17,671.76 ns | 99.517 ns | 88.219 ns | 1.2817 | - | 10984 B |
+| Method                           | Mean         | Error        | StdDev       | Median       | Gen0    | Gen1   | Allocated |
+|--------------------------------- |-------------:|-------------:|-------------:|-------------:|--------:|-------:|----------:|
+| GetBytes_SimpleObject            |    922.87 ns |    18.327 ns |    26.285 ns |    922.98 ns |  0.4063 | 0.0019 |    3400 B |
+| JsonSerializer_SimpleObject      |    420.59 ns |     8.150 ns |     8.004 ns |    417.81 ns |  0.0191 |      - |     160 B |
+| GetBytes_ComplexObject           |  1,959.70 ns |    23.159 ns |    20.530 ns |  1,952.94 ns |  0.6447 | 0.0038 |    5400 B |
+| JsonSerializer_ComplexObject     |  1,021.60 ns |    20.506 ns |    21.059 ns |  1,019.33 ns |  0.0763 |      - |     640 B |
+| GetBytes_SimpleList              | 38,655.29 ns |   727.712 ns |   996.100 ns | 38,411.80 ns |  8.8501 | 0.3052 |   74136 B |
+| JsonSerializer_SimpleList        | 38,640.88 ns |   543.558 ns |   508.445 ns | 38,413.91 ns |  1.5259 |      - |   12952 B |
+| GetBytes_ComplexList             | 63,460.96 ns | 1,194.750 ns | 1,467.260 ns | 63,554.36 ns | 12.9395 | 0.7324 |  108672 B |
+| JsonSerializer_ComplexList       | 49,888.94 ns |   599.060 ns |   500.242 ns | 49,828.89 ns |  1.8311 |      - |   15488 B |
+| GetBytes_Dictionary              |  9,541.98 ns |   183.778 ns |   211.639 ns |  9,526.38 ns |  2.3956 | 0.0305 |   20112 B |
+| JsonSerializer_Dictionary        |  8,791.93 ns |   171.792 ns |   210.976 ns |  8,789.13 ns |  0.3510 |      - |    3032 B |
+| GetBytes_Null                    |     90.39 ns |     1.879 ns |     4.241 ns |     88.40 ns |  0.0526 |      - |     440 B |
+| JsonSerializer_Null              |     96.02 ns |     1.963 ns |     3.921 ns |     94.52 ns |  0.0038 |      - |      32 B |
+| GetBytes_PrimitiveTypes          |    972.59 ns |    19.039 ns |    26.061 ns |    974.05 ns |  0.4158 |      - |    3480 B |
+| JsonSerializer_PrimitiveTypes    |    697.90 ns |    13.506 ns |    15.012 ns |    696.78 ns |  0.0296 |      - |     248 B |
+| GetBytes_LargeString             |  1,413.90 ns |    29.511 ns |    83.236 ns |  1,385.06 ns |  2.1820 | 0.0362 |   18272 B |
+| JsonSerializer_LargeString       |  2,462.38 ns |    50.605 ns |   149.211 ns |  2,456.63 ns |  0.2022 |      - |    1712 B |
+| GetBytes_ArrayOfPrimitives       | 86,718.33 ns | 1,385.149 ns | 1,482.094 ns | 86,772.27 ns | 10.6201 | 0.3662 |   88944 B |
+| JsonSerializer_ArrayOfPrimitives | 18,335.04 ns |   361.243 ns |   386.525 ns | 18,261.74 ns |  1.3123 |      - |   10992 B |
 
 ### Get item
 
-| Method | Mean | Error | StdDev | Gen0 | Gen1 | Allocated |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| GetItem\_SimpleObject | 879.23 ns | 8.601 ns | 7.182 ns | 0.3538 | 0.0019 | 2960 B |
-| JsonDeserialize\_SimpleObject | 652.74 ns | 4.640 ns | 3.875 ns | 0.0134 | - | 112 B |
-| GetItem\_ComplexObject | 2,650.08 ns | 36.302 ns | 32.181 ns | 0.6599 | 0.0076 | 5520 B |
-| JsonDeserialize\_ComplexObject | 2,121.66 ns | 27.759 ns | 25.966 ns | 0.2136 | - | 1800 B |
-| GetItem\_SimpleList | 57,784.33 ns | 694.265 ns | 649.416 ns | 11.8408 | 1.2207 | 99801 B |
-| JsonDeserialize\_SimpleList | 69,595.65 ns | 489.255 ns | 408.550 ns | 1.4648 | - | 13064 B |
-| GetItem\_ComplexList | 125,647.49 ns | 1,260.907 ns | 1,117.761 ns | 23.9258 | 4.8828 | 202086 B |
-| JsonDeserialize\_ComplexList | 100,260.10 ns | 1,135.784 ns | 948.431 ns | 7.0801 | 0.9766 | 60232 B |
-| GetItem\_Dictionary | 13,209.50 ns | 188.504 ns | 176.327 ns | 2.7008 | 0.0763 | 22670 B |
-| JsonDeserialize\_Dictionary | 15,962.22 ns | 187.164 ns | 165.916 ns | 0.6409 | - | 5512 B |
-| GetItem\_Null | 314.87 ns | 6.278 ns | 5.873 ns | 0.2475 | 0.0014 | 2072 B |
-| JsonDeserialize\_Null | 72.36 ns | 0.262 ns | 0.232 ns | - | - | - |
-| GetItem\_LargeString | 2,270.12 ns | 40.225 ns | 47.884 ns | 1.4534 | 0.0076 | 12184 B |
-| JsonDeserialize\_LargeString | 2,799.16 ns | 54.077 ns | 47.938 ns | 0.5035 | - | 4240 B |
-| GetItem\_PrimitiveTypes | 997.64 ns | 17.648 ns | 15.644 ns | 0.3586 | 0.0019 | 3008 B |
-| JsonDeserialize\_PrimitiveTypes | 941.73 ns | 14.625 ns | 13.680 ns | 0.0210 | - | 176 B |
-| GetItem\_ArrayOfPrimitives | 26,854.68 ns | 528.755 ns | 587.710 ns | 8.4534 | 0.3052 | 70800 B |
-| JsonDeserialize\_ArrayOfPrimitives | 47,826.88 ns | 529.952 ns | 469.788 ns | 1.4648 | - | 12448 B |
+| Method                            | Mean          | Error        | StdDev       | Gen0    | Gen1   | Allocated |
+|---------------------------------- |--------------:|-------------:|-------------:|--------:|-------:|----------:|
+| GetItem_SimpleObject              |     823.66 ns |    16.255 ns |    25.307 ns |  0.3462 | 0.0019 |    2896 B |
+| JsonDeserialize_SimpleObject      |     688.69 ns |    13.647 ns |    13.404 ns |  0.0124 |      - |     104 B |
+| GetItem_ComplexObject             |   2,423.26 ns |    45.954 ns |    86.313 ns |  0.6714 | 0.0038 |    5632 B |
+| JsonDeserialize_ComplexObject     |   2,082.58 ns |    41.529 ns |    62.159 ns |  0.2098 |      - |    1776 B |
+| GetItem_SimpleList                |  41,131.37 ns |   541.948 ns |   452.551 ns |  8.2397 | 0.4883 |   69107 B |
+| JsonDeserialize_SimpleList        |  70,627.62 ns |   799.426 ns |   708.671 ns |  1.5869 |      - |   13864 B |
+| GetItem_ComplexList               |  88,006.76 ns | 1,658.766 ns | 2,270.537 ns | 15.8691 | 2.3193 |  132989 B |
+| JsonDeserialize_ComplexList       | 103,485.21 ns | 1,300.564 ns | 1,086.030 ns |  7.3242 | 0.9766 |   61432 B |
+| GetItem_Dictionary                |  10,373.22 ns |   167.814 ns |   218.206 ns |  2.3193 | 0.0458 |   19464 B |
+| JsonDeserialize_Dictionary        |  16,022.08 ns |   290.119 ns |   345.366 ns |  0.6104 |      - |    5352 B |
+| GetItem_Null                      |      29.08 ns |     0.769 ns |     2.242 ns |  0.0287 |      - |     240 B |
+| JsonDeserialize_Null              |      72.28 ns |     1.282 ns |     1.199 ns |       - |      - |         - |
+| GetItem_LargeString               |   2,802.18 ns |    56.014 ns |   135.280 ns |  1.6823 | 0.0191 |   14088 B |
+| JsonDeserialize_LargeString       |   2,646.16 ns |    50.467 ns |    49.566 ns |  0.4997 |      - |    4208 B |
+| GetItem_PrimitiveTypes            |     904.18 ns |    17.955 ns |    40.527 ns |  0.3605 | 0.0019 |    3024 B |
+| JsonDeserialize_PrimitiveTypes    |     930.20 ns |    11.391 ns |    10.098 ns |  0.0257 |      - |     216 B |
+| GetItem_ArrayOfPrimitives         |  26,434.80 ns |   521.064 ns |   730.459 ns |  8.4534 | 0.2747 |   70720 B |
+| JsonDeserialize_ArrayOfPrimitives |  47,628.61 ns |   493.229 ns |   411.869 ns |  1.4648 |      - |   12448 B |
 
 ### Output bytes size
 
-| Object | bin converter | bytes | percent | \> | json converter | bytes | percent |
-| :--- | --- | --- | --- | :--- | --- | --- | --- |
-| SimpleObject | bindata(\*) | 64 | 49.612404 | \< | jsondata | 129 | |
-| ComplexObject | bindata(\*) | 230 | 71.20743 | \< | jsondata | 323 | |
-| SimpleList | bindata(\*) | 4610 | 35.711517 | \< | jsondata | 12909 | |
-| ComplexList | bindata(\*) | 9515 | 63.0049 | \< | jsondata | 15102 | |
-| Dictionary | bindata(\*) | 1077 | 39.135174 | \< | jsondata | 2752 | |
-| Null | bindata | 11 | | \> | jsondata(\*) | 4 | 36.363636 |
-| LargeString | bindata(\*) | 2174 | 99.954025 | \< | jsondata | 2175 | |
-| Primitive | bindata(\*) | 110 | 42.801556 | \< | jsondata | 257 | |
-| PrimitiveArr | bindata(\*) | 4269 | 38.802036 | \< | jsondata | 11002 | |
+|Object                   |bin converter  |bytes     |  percent|   >   |json converter |bytes     |  percent
+|-------------------------|---------------|----------|---------|-------|---------------|----------|---------
+|SimpleObject             |bindata(*)     |61        |48,412697|   <   |jsondata       |126       |
+|ComplexObject            |bindata(*)     |215       |68,910255|   <   |jsondata       |312       |
+|SimpleList               |bindata(*)     |4285      |33,937904|   <   |jsondata       |12626     |
+|ComplexList              |bindata(*)     |9289      | 61,96798|   <   |jsondata       |14990     |
+|Dictionary               |bindata(*)     |1010      | 37,49072|   <   |jsondata       |2694      |
+|Null                     |bindata        |5         |         |   >   |jsondata(*)    |4         |       80
+|LargeString              |bindata(*)     |1953      | 99,94882|   <   |jsondata       |1954      |
+|Primitive                |bindata(*)     |90        | 38,29787|   <   |jsondata       |235       |
+|PrimitiveArr             |bindata(*)     |4269      |38,703537|   <   |jsondata       |11030     |

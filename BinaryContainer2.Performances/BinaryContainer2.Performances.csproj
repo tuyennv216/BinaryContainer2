@@ -16,4 +16,8 @@
     <ProjectReference Include="..\BinaryContainer2\BinaryContainer2.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Converter\UseRefPool\" />
+  </ItemGroup>
+
 </Project>

@@ -25,13 +25,13 @@ namespace BinaryContainer2.Container
 		{
 			get
 			{
-				if (TotalElements == 0) return 4;
+				if (TotalElements == 0) return 5;
 				// Length (int size) + Settings size + Flags size + Items size + Arrays size
 				return 4 + 1 + Flags.TotalExportBytes + Items.Count + Arrays.Count;
 			}
 		}
 
-		public DataContainer()
+		public DataContainer(bool useRefPool = true)
 		{
 			Flags = new(); 
 			Items = new();
@@ -40,6 +40,13 @@ namespace BinaryContainer2.Container
 			Items_Itor = 0;
 			Arrays_Itor = 0;
 			TempBytesPosition = new();
+
+			Settings = Settings.Set(Settings.Using_RefPool, useRefPool);
+		}
+
+		public void SetSetting(Settings setting, bool value)
+		{
+			Settings = Settings.Set(setting, value);
 		}
 
 		public void UpdateSettings()
@@ -121,8 +128,6 @@ namespace BinaryContainer2.Container
 			var length = this.TotalExportBytes;
 			var lengthData = BitConverter.GetBytes(length);
 			
-			if (length == 4) return lengthData;
-
 			UpdateSettings();
 
 			using (var memoryStream = new MemoryStream(length))
@@ -154,10 +159,11 @@ namespace BinaryContainer2.Container
 		public int Import(byte[] buffer, int start = 0)
 		{
 			var length = BitConverter.ToInt32(buffer, start);
-			if (length == 4)
-				return start + length;
 
 			Settings = (Settings)buffer[start + 4];
+
+			if (length == 5)
+				return start + length;
 
 			var dataPivot = start + 5;
 

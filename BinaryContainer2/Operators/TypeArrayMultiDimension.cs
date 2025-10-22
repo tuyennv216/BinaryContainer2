@@ -30,6 +30,7 @@ namespace BinaryContainer2.Operators
 		public override void Write(DataContainer container, object? data, RefPool refPool)
 		{
 			BuildCompleteSignal.Wait();
+
 			container.Flags.Add(data == null);
 			if (data == null) return;
 
@@ -38,9 +39,11 @@ namespace BinaryContainer2.Operators
 
 			if (isany)
 			{
-				if (refPool.Write(container, data)) return;
-
-				refPool.AddObject(data);
+				if (container.Settings.Is(Settings.Using_RefPool, true))
+				{
+					if (refPool.Write(container, data)) return;
+					refPool.AddObject(data);
+				}
 
 				var arr = (System.Array)data;
 				container.AddNumber(arr.Rank);
@@ -64,14 +67,18 @@ namespace BinaryContainer2.Operators
 		public override object? Read(DataContainer container, RefPool refPool)
 		{
 			BuildCompleteSignal.Wait();
+
 			var isnull = container.Flags.Read();
 			if (isnull == true) return null;
 
 			var isany = container.Flags.Read();
 			if (isany == false) return Array.CreateInstance(Follows![0].Raw, 0);
 
-			var refObject = refPool.Read(container);
-			if (refObject != null) return refObject;
+			if (container.Settings.Is(Settings.Using_RefPool, true))
+			{
+				var refObject = refPool.Read(container);
+				if (refObject != null) return refObject;
+			}
 
 			var rank = container.ReadNumber();
 			var dimensions = new int[rank];
@@ -85,6 +92,11 @@ namespace BinaryContainer2.Operators
 				Follows![0].Raw,
 				dimensions
 			);
+
+			if (container.Settings.Is(Settings.Using_RefPool, true))
+			{
+				refPool.AddObject(arr);
+			}
 
 			while (IncrementIndices(indices, dimensions))
 			{
