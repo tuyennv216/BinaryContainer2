@@ -3,10 +3,11 @@ using BinaryContainer2.Container;
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
+
 // Định nghĩa alias cho kiểu dữ liệu lồng nhau: List<List<int>>
 using NestedList = System.Collections.Generic.List<System.Collections.Generic.List<int>>;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayGenericTests
 {
 	[TestClass]
 	public class TypeArrayGeneric_NestedList_Tests

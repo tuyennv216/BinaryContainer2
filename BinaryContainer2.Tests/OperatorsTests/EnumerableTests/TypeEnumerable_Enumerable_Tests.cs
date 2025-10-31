@@ -3,10 +3,11 @@ using BinaryContainer2.Container;
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
+
 // Định nghĩa alias cho kiểu dữ liệu đang được test
 using EnumerableInt = System.Collections.Generic.IEnumerable<int>;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.EnumerableTests
 {
 	[TestClass]
 	public class TypeEnumerable_Enumerable_Tests

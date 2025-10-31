@@ -3,11 +3,12 @@ using BinaryContainer2.Container;
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
+
 // Định nghĩa kiểu dữ liệu đang được test: IEnumerable<List<int[]>>
 using DeepNestedType = System.Collections.Generic.IEnumerable<System.Collections.Generic.List<int[]>>;
 using InnerListType = System.Collections.Generic.List<int[]>;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.EnumerableTests
 {
 	[TestClass]
 	public class TypeEnumerable_DeepNested_Tests

@@ -40,7 +40,7 @@ public class SingleLevelCollectionClass
 	}
 }
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.ClassTests
 {
 	[TestClass]
 	public class TypeClass_SingleLevelCollections_Tests

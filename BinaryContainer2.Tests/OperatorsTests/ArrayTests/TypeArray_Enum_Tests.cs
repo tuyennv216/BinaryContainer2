@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayTests
 {
 	// Định nghĩa Enum mẫu để sử dụng trong Unit Test
 	public enum TestStatusCode : int

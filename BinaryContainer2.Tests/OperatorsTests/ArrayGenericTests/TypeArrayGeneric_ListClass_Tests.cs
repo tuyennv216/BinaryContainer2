@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayGenericTests
 {
 	// Lớp mẫu để kiểm tra serialization của phần tử
 	public class MyTestClass2
@@ -80,7 +80,7 @@ namespace BinaryContainer2.Tests.OperatorsTests
 						if (i > 0 && expectedItem == expected[i - 1])
 						{
 							// Sử dụng ReferenceEquals để kiểm tra tham chiếu
-							Assert.IsTrue(object.ReferenceEquals(actualItem, actualList[i - 1]), $"Định danh tham chiếu tại {i} phải được bảo toàn: {message}");
+							Assert.IsTrue(ReferenceEquals(actualItem, actualList[i - 1]), $"Định danh tham chiếu tại {i} phải được bảo toàn: {message}");
 						}
 					}
 				}
@@ -188,9 +188,9 @@ namespace BinaryContainer2.Tests.OperatorsTests
 
 			// 2. Kiểm tra định danh (quan trọng nhất cho RefPool)
 			// Kiểm tra xem readList[0] và readList[2] có phải là cùng một instance không.
-			Assert.IsTrue(object.ReferenceEquals(readList[0], readList[2]), "RefPool phải bảo toàn định danh tham chiếu lặp lại.");
+			Assert.IsTrue(ReferenceEquals(readList[0], readList[2]), "RefPool phải bảo toàn định danh tham chiếu lặp lại.");
 			// Kiểm tra readList[0] và readList[1] không phải là cùng một instance.
-			Assert.IsFalse(object.ReferenceEquals(readList[0], readList[1]), "Các đối tượng khác nhau không được tham chiếu cùng một instance.");
+			Assert.IsFalse(ReferenceEquals(readList[0], readList[1]), "Các đối tượng khác nhau không được tham chiếu cùng một instance.");
 		}
 
 		/// <summary>

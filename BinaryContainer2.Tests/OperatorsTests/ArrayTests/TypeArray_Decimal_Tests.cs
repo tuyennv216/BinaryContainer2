@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayTests
 {
 	[TestClass]
 	public class TypeArray_Decimal_Tests // Test cho mảng decimal[]
@@ -44,10 +44,10 @@ namespace BinaryContainer2.Tests.OperatorsTests
 			// Cách đơn giản để tạo ngẫu nhiên trong C# là dùng Random.Next() và ép kiểu.
 			// Đây là cách đơn giản để tạo số ngẫu nhiên không quá lớn cho mục đích test
 			// (Tránh tạo số có 28 chữ số ngẫu nhiên quá mức cần thiết)
-			double randomDouble = (_random.NextDouble() * (double)(maxValue - minValue)) + (double)minValue;
+			double randomDouble = _random.NextDouble() * (double)(maxValue - minValue) + (double)minValue;
 			// Thêm một số chữ số thập phân ngẫu nhiên
 			int scale = _random.Next(0, 28);
-			randomDouble += (_random.NextDouble() * Math.Pow(10, -scale));
+			randomDouble += _random.NextDouble() * Math.Pow(10, -scale);
 
 			// Ép kiểu ngược lại
 			return (decimal)randomDouble;

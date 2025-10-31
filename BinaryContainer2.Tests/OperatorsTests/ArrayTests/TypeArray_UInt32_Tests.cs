@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayTests
 {
 	[TestClass]
 	public class TypeArray_UInt32_Tests // Test cho mảng uint[] (UInt32)
@@ -40,7 +40,7 @@ namespace BinaryContainer2.Tests.OperatorsTests
 			// Kết hợp 2 giá trị Next(int) để tạo uint 32-bit đầy đủ
 			int first = _random.Next();
 			int second = _random.Next();
-			return (uint)((((long)first) << 32) | (uint)second);
+			return (uint)((long)first << 32 | (uint)second);
 		}
 
 

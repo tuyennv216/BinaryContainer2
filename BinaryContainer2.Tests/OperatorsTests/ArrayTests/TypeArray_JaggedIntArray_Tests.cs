@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayTests
 {
 	[TestClass]
 	public class TypeArray_JaggedIntArray_Tests // Test cho mảng int[][]

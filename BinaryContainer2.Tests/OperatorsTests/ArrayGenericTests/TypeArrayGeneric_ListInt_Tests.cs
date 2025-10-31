@@ -3,7 +3,7 @@ using BinaryContainer2.Container;
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayGenericTests
 {
 	[TestClass]
 	// Đã đổi tên để phản ánh class và kiểu dữ liệu đang được test

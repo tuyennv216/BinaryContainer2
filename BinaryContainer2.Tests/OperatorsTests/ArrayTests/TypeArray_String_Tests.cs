@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayTests
 {
 	[TestClass]
 	public class TypeArray_String_Tests // Test cho mảng string[]
@@ -192,7 +192,7 @@ namespace BinaryContainer2.Tests.OperatorsTests
 				if (length == 0)
 				{
 					// Thi thoảng chèn NULL hoặc chuỗi rỗng
-					originalArray[i] = (i % 5 == 0) ? null! : string.Empty;
+					originalArray[i] = i % 5 == 0 ? null! : string.Empty;
 				}
 				else
 				{

@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.DictionaryTests
 {
 	[TestClass]
 	public class TypeDictionary_StringInt_Tests // Test cho Dictionary<string, int>

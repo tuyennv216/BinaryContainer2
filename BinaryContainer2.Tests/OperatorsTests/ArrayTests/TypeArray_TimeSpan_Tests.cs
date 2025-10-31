@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayTests
 {
 	[TestClass]
 	public class TypeArray_TimeSpan_Tests // Test cho mảng TimeSpan[]
@@ -160,7 +160,7 @@ namespace BinaryContainer2.Tests.OperatorsTests
 
 			// Đảm bảo số ticks ngẫu nhiên nằm trong dải kiểm tra 
 			// (dùng long.MaxValue/2 để tránh lỗi tràn khi tính toán)
-			long range = (long.MaxValue / 2);
+			long range = long.MaxValue / 2;
 			long randomLong = (long)(_random.NextDouble() * range * 2) - range;
 
 			// Ép về phạm vi an toàn nếu cần, hoặc sử dụng trực tiếp nếu tin tưởng vào giới hạn của TimeSpan.

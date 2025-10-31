@@ -1,17 +1,14 @@
-﻿// Thay thế bằng namespace chứa RefPool của bạn
-using BinaryContainer2.Others;
-
-namespace BinaryContainer2.Tests.OthersTests
+﻿namespace BinaryContainer2.Tests.OthersTests
 {
 	[TestClass]
-	public class RefPoolNewMSTests
+	public class RefPool
 	{
-		private RefPool _pool;
+		private Others.RefPool _pool;
 
 		[TestInitialize]
 		public void Setup()
 		{
-			_pool = new RefPool();
+			_pool = new Others.RefPool();
 		}
 
 		// --- Các Trường Hợp Cơ Bản (Basic Cases) ---
@@ -120,7 +117,7 @@ namespace BinaryContainer2.Tests.OthersTests
 			// (Không thực tế để chạy trong Unit Test thực, nhưng là một trường hợp biên lý thuyết)
 
 			// Chúng ta mô phỏng việc đặt _index gần giới hạn để kiểm tra việc tăng (Increment)
-			var indexField = typeof(RefPool).GetField("_index", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+			var indexField = typeof(Others.RefPool).GetField("_index", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 			indexField.SetValue(_pool, int.MaxValue - 2); // Bắt đầu từ MaxValue - 2
 
 			object obj1 = new object();
@@ -186,7 +183,7 @@ namespace BinaryContainer2.Tests.OthersTests
 		private int GetPrivateMapCount(string fieldName)
 		{
 			// Lấy FieldInfo cho field private
-			var fieldInfo = typeof(RefPool).GetField(fieldName,
+			var fieldInfo = typeof(Others.RefPool).GetField(fieldName,
 				System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
 			// Lấy giá trị và ép kiểu thành IDictionary để truy cập Count

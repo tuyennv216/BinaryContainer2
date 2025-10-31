@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.DictionaryTests
 {
 	// --- Các Lớp Hỗ Trợ (MUST override Equals và GetHashCode cho Key Class) ---
 

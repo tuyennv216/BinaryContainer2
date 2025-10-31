@@ -2,7 +2,7 @@
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayTests
 {
 	// Định nghĩa một lớp đơn giản để sử dụng làm kiểu phần tử.
 	// BinaryContainer2 sẽ cần các TypeOperator tương ứng cho lớp này.
@@ -219,10 +219,10 @@ namespace BinaryContainer2.Tests.OperatorsTests
 			{
 				// Kiểm tra nếu hệ thống bảo toàn tham chiếu trong RefPool
 				// Đây là kiểm tra bắt buộc cho Reference Type serialization
-				Assert.IsTrue(object.ReferenceEquals(readArray[0], readArray[2]), "Tham chiếu lặp lại phải được bảo toàn (RefPool hoạt động).");
+				Assert.IsTrue(ReferenceEquals(readArray[0], readArray[2]), "Tham chiếu lặp lại phải được bảo toàn (RefPool hoạt động).");
 
 				// Kiểm tra tính toàn vẹn (để đảm bảo không có logic bị loại bỏ)
-				Assert.IsFalse(object.ReferenceEquals(readArray[0], readArray[1]), "Các đối tượng khác nhau không được tham chiếu cùng một instance.");
+				Assert.IsFalse(ReferenceEquals(readArray[0], readArray[1]), "Các đối tượng khác nhau không được tham chiếu cùng một instance.");
 			}
 		}
 	}

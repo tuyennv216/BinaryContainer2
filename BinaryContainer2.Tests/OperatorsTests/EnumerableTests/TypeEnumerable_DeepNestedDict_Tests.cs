@@ -3,6 +3,7 @@ using BinaryContainer2.Container;
 using BinaryContainer2.Operators;
 using BinaryContainer2.Others;
 
+
 // Định nghĩa kiểu dữ liệu đang được test: IEnumerable<Dictionary<MyKeyClass, MyValueClass>>
 using DeepNestedType = System.Collections.Generic.IEnumerable<System.Collections.Generic.Dictionary<MyKeyClass, MyValueClass>>;
 using InnerDictType = System.Collections.Generic.Dictionary<MyKeyClass, MyValueClass>;
@@ -36,7 +37,7 @@ public class MyValueClass
 	public override int GetHashCode() => HashCode.Combine(Value, IsActive);
 }
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.EnumerableTests
 {
 	[TestClass]
 	public class TypeEnumerable_DeepNestedDict_Tests
@@ -107,8 +108,8 @@ namespace BinaryContainer2.Tests.OperatorsTests
 				if (checkIdentity)
 				{
 					// Lấy các tham chiếu cần kiểm tra
-					var sharedKey = expectedDict.Keys.FirstOrDefault(k => expectedDict.Keys.Count(k2 => object.ReferenceEquals(k, k2)) > 1);
-					var sharedValue = expectedDict.Values.FirstOrDefault(v => expectedDict.Values.Count(v2 => object.ReferenceEquals(v, v2)) > 1);
+					var sharedKey = expectedDict.Keys.FirstOrDefault(k => expectedDict.Keys.Count(k2 => ReferenceEquals(k, k2)) > 1);
+					var sharedValue = expectedDict.Values.FirstOrDefault(v => expectedDict.Values.Count(v2 => ReferenceEquals(v, v2)) > 1);
 
 					if (sharedKey != null)
 					{
@@ -117,7 +118,7 @@ namespace BinaryContainer2.Tests.OperatorsTests
 						if (readKeys.Length > 1)
 						{
 							// Đảm bảo rằng các key có cùng giá trị ban đầu phải là cùng một instance sau khi đọc.
-							Assert.IsTrue(object.ReferenceEquals(readKeys[0], readKeys[1]), $"[Identity] Key '{sharedKey.KeyName}' phải bảo toàn định danh.");
+							Assert.IsTrue(ReferenceEquals(readKeys[0], readKeys[1]), $"[Identity] Key '{sharedKey.KeyName}' phải bảo toàn định danh.");
 						}
 					}
 					// (Kiểm tra tương tự cho sharedValue có thể phức tạp hơn do Dictionary chỉ chứa 1 value duy nhất cho mỗi key,
@@ -328,7 +329,7 @@ namespace BinaryContainer2.Tests.OperatorsTests
 			// Kiểm tra Key instance có được bảo toàn giữa dict1 và dict2 không
 			var readSharedKey1 = readDict1.Keys.First(k => k.KeyId == 50);
 			var readSharedKey2 = readDict2.Keys.First(k => k.KeyId == 50);
-			Assert.IsTrue(object.ReferenceEquals(readSharedKey1, readSharedKey2), "[Identity] Shared Key phải là cùng một instance giữa các Dictionary.");
+			Assert.IsTrue(ReferenceEquals(readSharedKey1, readSharedKey2), "[Identity] Shared Key phải là cùng một instance giữa các Dictionary.");
 
 			// 3. Kiểm tra định danh tham chiếu cho Value (sharedValue)
 			// sharedValue được sử dụng trong dict1 (Key=1) và dict2
@@ -337,7 +338,7 @@ namespace BinaryContainer2.Tests.OperatorsTests
 			MyValueClass? readSharedValue2;
 			readDict2.TryGetValue(sharedKey, out readSharedValue2);
 
-			Assert.IsTrue(object.ReferenceEquals(readSharedValue1, readSharedValue2), "[Identity] Shared Value phải là cùng một instance giữa các Dictionary.");
+			Assert.IsTrue(ReferenceEquals(readSharedValue1, readSharedValue2), "[Identity] Shared Value phải là cùng một instance giữa các Dictionary.");
 		}
 	}
 }

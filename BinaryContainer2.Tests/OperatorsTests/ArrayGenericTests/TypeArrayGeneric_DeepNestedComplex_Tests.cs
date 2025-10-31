@@ -24,7 +24,7 @@ public class MyComplexValueClass
 	public override int GetHashCode() => HashCode.Combine(Id, Data);
 }
 
-namespace BinaryContainer2.Tests.OperatorsTests
+namespace BinaryContainer2.Tests.OperatorsTests.ArrayGenericTests
 {
 	[TestClass]
 	public class TypeArrayGeneric_DeepNestedComplex_Tests
@@ -105,9 +105,9 @@ namespace BinaryContainer2.Tests.OperatorsTests
 				Assert.AreEqual(expDict.Count, actDict.Count, $"[L2 Dict Count] Số lượng cặp Key-Value trong Dictionary {i} không khớp: {message}");
 
 				// Kiểm tra Identity (tham chiếu Dict lặp lại)
-				if (checkIdentity && i > 0 && object.ReferenceEquals(expected[i], expected[i - 1]))
+				if (checkIdentity && i > 0 && ReferenceEquals(expected[i], expected[i - 1]))
 				{
-					Assert.IsTrue(object.ReferenceEquals(actDict, actualList[i - 1]), $"[L1 Identity] Tham chiếu Dictionary tại index {i} phải được bảo toàn.");
+					Assert.IsTrue(ReferenceEquals(actDict, actualList[i - 1]), $"[L1 Identity] Tham chiếu Dictionary tại index {i} phải được bảo toàn.");
 				}
 
 				foreach (var expPair in expDict)
@@ -182,8 +182,8 @@ namespace BinaryContainer2.Tests.OperatorsTests
 			AssertDeepComplexEqual(originalData, readData!, "Bảo toàn tham chiếu Dictionary.", checkIdentity: true);
 
 			// 2. Kiểm tra Identity trực tiếp (readList[0] và readList[2] phải là cùng một instance)
-			Assert.IsTrue(object.ReferenceEquals(readList[0], readList[2]), "RefPool phải bảo toàn định danh tham chiếu cho Dictionary lặp lại.");
-			Assert.IsFalse(object.ReferenceEquals(readList[0], readList[1]), "Các Dictionary khác nhau không được tham chiếu cùng một instance.");
+			Assert.IsTrue(ReferenceEquals(readList[0], readList[2]), "RefPool phải bảo toàn định danh tham chiếu cho Dictionary lặp lại.");
+			Assert.IsFalse(ReferenceEquals(readList[0], readList[1]), "Các Dictionary khác nhau không được tham chiếu cùng một instance.");
 		}
 	}
 }
