@@ -14,13 +14,13 @@ Object: where object is a build-in type, enum, or class.
 Supports circular references, iterative references.  
 Supports polymorphism, inheritance.  
 Supports Dictionary with a Class Key.  
-Supports multi-level nested lists.  
+Supports multi-level nested types.  
 
 -----
 
 ## Build
 
-Passed: **538/538** test cases.  
+Passed: **692/692** test cases.  
 Version: **.NET Standard 2.0**  
 
 -----
@@ -42,37 +42,7 @@ TEST CASE 16: Using Nested NULL Data and Inheritance.
 TEST CASE 18: Polymorphism in Collection (Restoring actual type of each item).
 TEST CASE 19: Dictionary with Struct Value.
 TEST CASE 20: Property with Object type (Maximum polymorphism).
-TEST CASE 21: With Deeply Nested Nullable Struct type.
-TEST CASE 22: Using a Large String (Payload Size).
-TEST CASE 23: With Zero/Default values and empty-valued non-null objects.
-TEST CASE 24: Deep Inheritance combined with Polymorphism in a List.
-TEST CASE 25: Self-Referencing Property.
-TEST CASE 26: Using a Large String Nested in a Dictionary (Boundary Check).
-TEST CASE 27: Using List<object?> containing a mix of types (Boxing and Null).
-TEST CASE 29: Using a Deeply Nested Array (3D Array) and Decimal Precision.
-TEST CASE 30: Using Control Characters (Non-printable Characters) in String.
-TEST CASE 31: DateTimeOffset and Large TimeSpan with Ticks precision.
-TEST CASE 32: Advanced Generic Class (List<GenericWrapper<Guid, DateTime?>>).
-TEST CASE 33: Enum and Nullable Enum with value 0 and large values.
-TEST CASE 34: Array and Dictionary with Extremely Large Data Strings and Empty Lists.
-TEST CASE 35: 2-Dimensional Array and Char (Two-Dim Array).
-TEST CASE 36: Using Nested Object Array Type (Polymorphism in object[]).
-TEST CASE 37: The difference between List and Array, especially in nested empty structures.
-TEST CASE 39: Using Dictionary<TKey, TValue> where TValue is an Array.
-TEST CASE 40: With NULL Array and Large Size Array.
-TEST CASE 41: With Boolean/Byte types at limits (FALSE, 0, 255).
-TEST CASE 43: With Nested Struct (Size) and Boolean Array.
-TEST CASE 44: Using Special Byte Strings (0xFF and 0x00).
-TEST CASE 45: Using List<List<T>> where T is Decimal (Nesting and Precision).
-TEST CASE 46: With SortedList (Ordered Collection).
-TEST CASE 47: Deeply Nested Nullable Type (Struct in List).
-TEST CASE 48: Indirect Circular Reference via Collection.
-TEST CASE 49: With List<object> containing mixed data.
-TEST CASE 50: With a Base Class having NO Public Properties.
-TEST CASE 51: Using a deep and unnecessary empty structure.
-TEST CASE 52: KeyValuePair (Generic Struct) in both single property and List.
-TEST CASE 53: Object Array containing Enum Types (Boxing/Unboxing Enum).
-TEST CASE 54: Deep Empty Structure and Default Value of Tuple.
+...
 ```
 
 -----

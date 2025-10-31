@@ -13,10 +13,10 @@ Object: với object là kiểu buildin, enum, class.
 Hỗ trợ tham chiều vòng tròn, tham chiếu lặp.  
 Hỗ trợ đa hình, kế thừa.  
 Hỗ trợ Dictionary với Key là một class.  
-Hỗ trợ danh sách lồng nhiều lớp.  
+Hỗ trợ lồng nhiều kiểu dữ liệu.  
 
 ## Build
-Đã pass: **538/538** testcases.  
+Đã pass: **692/692** testcases.  
 Phiên bản: **.NET Standard 2.0**  
 
 ## Đây là một số tests theo nhu cầu thực tế đã pass
@@ -36,37 +36,7 @@ TEST CASE 16: Bằng Dữ liệu NULL Lồng ghép và Kế thừa.
 TEST CASE 18: Đa hình trong Collection (Khôi phục kiểu thực tế từng item).
 TEST CASE 19: Dictionary với Value là Struct.
 TEST CASE 20: Thuộc tính có kiểu Object (Đa hình tối đa).
-TEST CASE 21: Với Kiểu Dữ liệu Nullable Struct lồng ghép sâu.
-TEST CASE 22: Bằng String Lớn (Payload Size).
-TEST CASE 23: Với các giá trị Zero/Default và các đối tượng có giá trị rỗng không phải null.
-TEST CASE 24: Kế thừa Sâu kết hợp Đa hình trong List.
-TEST CASE 25: Thuộc tính Tự Tham Chiếu (Self-Referencing Property).
-TEST CASE 26: Bằng String Lớn Lồng ghép trong Dictionary (Boundary Check).
-TEST CASE 27: Bằng List<object?> chứa hỗn hợp các kiểu (Boxing và Null).
-TEST CASE 29: Bằng Mảng Lồng Ghép Sâu (3D Array) và Decimal chính xác.
-TEST CASE 30: Bằng Ký tự Control (Non-printable Characters) trong Chuỗi.
-TEST CASE 31: DateTimeOffset và Large TimeSpan với độ chính xác Ticks.
-TEST CASE 32: Class Generic Nâng cao (List<GenericWrapper<Guid, DateTime?>>).
-TEST CASE 33: Enum và Nullable Enum với giá trị 0 và giá trị lớn.
-TEST CASE 34: Array và Dictionary với các Chuỗi Dữ liệu Cực Lớn và List Rỗng.
-TEST CASE 35: Mảng 2 chiều và Char (Two-Dim Array).
-TEST CASE 36: Bằng Kiểu Object Array lồng ghép (Polymorphism trong object[]).
-TEST CASE 37: Sự khác biệt giữa List và Array, đặc biệt là các cấu trúc rỗng lồng ghép.
-TEST CASE 39: Bằng Dictionary<TKey, TValue> với TValue là một Array.
-TEST CASE 40: Với Mảng NULL và Mảng Kích thước Lớn.
-TEST CASE 41: Với các Kiểu Boolean/Byte ở giới hạn (FALSE, 0, 255).
-TEST CASE 43: Với Struct Lồng ghép (Size) và Mảng Boolean.
-TEST CASE 44: Bằng Chuỗi Byte Đặc biệt (0xFF và 0x00).
-TEST CASE 45: Bằng List<List<T>> với T là Decimal (Lồng ghép và Độ chính xác).
-TEST CASE 46: Với SortedList (Collection có thứ tự).
-TEST CASE 47: Kiểu Dữ liệu Nullable Lồng ghép Sâu (Struct trong List).
-TEST CASE 48: Tham chiếu Vòng tròn Gián tiếp qua Collection.
-TEST CASE 49: Với List<object> chứa dữ liệu hỗn hợp.
-TEST CASE 50: Với Lớp Cơ sở KHÔNG có Thuộc tính Public.
-TEST CASE 51: Bằng một cấu trúc rỗng sâu và không cần thiết.
-TEST CASE 52: KeyValuePair (Struct Generic) trong cả thuộc tính đơn và List.
-TEST CASE 53: Object Array chứa Kiểu Enum (Boxing/Unboxing Enum).
-TEST CASE 54: Cấu trúc Rỗng Sâu và Giá trị Mặc định của Tuple.
+...
 ```
 
 ## Cách sử dụng
