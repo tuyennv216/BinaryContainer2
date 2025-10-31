@@ -131,6 +131,12 @@ namespace BinaryContainer2.Operators
 						}
 				}
 
+				if (dataType == typeof(object))
+				{
+					container.Items.Add(TypeUtils.TypeBuildinSign.Object);
+					return;
+				}
+
 				// Kiểm tra nếu type Class
 				container.Items.Add(TypeUtils.TypeBuildinSign.Classes);
 				container.Flags.Add(dataType.IsClass);
@@ -277,6 +283,12 @@ namespace BinaryContainer2.Operators
 					{
 						var op = TypeOperators.Instance.GetOperator<Guid>();
 						var value = op.Read(container, refPool);
+						return value;
+					}
+
+				case TypeUtils.TypeBuildinSign.Object:
+					{
+						var value = Activator.CreateInstance(typeof(Object));
 						return value;
 					}
 

@@ -117,6 +117,7 @@ namespace BinaryContainer2.Types
 			public const byte TimeSpan = ((byte)TypeCategory.Buildin & Mask_Category) | ((byte)TypeBuildinItems.TIMESPAN & Mask_Type);
 			public const byte Guid = ((byte)TypeCategory.Buildin & Mask_Category) | ((byte)TypeBuildinItems.GUID & Mask_Type);
 			public const byte Classes = ((byte)TypeCategory.Buildin & Mask_Category) | ((byte)TypeBuildinItems.CLASSES & Mask_Type);
+			public const byte Object = ((byte)TypeCategory.Buildin & Mask_Category) | ((byte)TypeBuildinItems.OBJECT & Mask_Type);
 		}
 	}
 }

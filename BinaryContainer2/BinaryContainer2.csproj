@@ -17,8 +17,12 @@
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<RepositoryUrl>https://github.com/tuyennv216/BinaryContainer2</RepositoryUrl>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Utilities\UndoRedo.cs~RF3083f7b.TMP" />
+  </ItemGroup>
   
   <ItemGroup>
 	<None Include="..\LICENSE.txt" Pack="true" PackagePath="\" />
