@@ -1,64 +1,54 @@
-﻿## Data Type Support:
+﻿
+## Hỗ trợ kiểu dữ liệu:
 
 Nullable, Boolean, Byte, Char, Decimal, Double, Guid, Int16, Int32, Int64, SByte, Single, String, UInt16, UInt32, UInt64.  
 DateTime, DateTimeOffset, TimeSpan.  
-Array, List, Stack, Queue, LinkedList, Multidimensional Array, IEnumerable.  
-KeyValuePair, Dictionary, SortedList, Tuple.  
+Array, List, Stack, Queue, LinkedList, Array nhiều chiều, IEnumerable.  
+KeyPairValue, Dictionary, ShortedList, Tuple.  
 Enum, Class.  
-Object: where object is a build-in type, enum, or class.  
+Object: với object là kiểu buildin, enum, class.  
 
------
+## Điểm nổi bật:
 
-## Highlights:
-
-Supports circular references, iterative references.  
-Supports polymorphism, inheritance.  
-Supports Dictionary with a Class Key.  
-Supports multi-level nested types.  
-
------
+Hỗ trợ tham chiều vòng tròn, tham chiếu lặp.  
+Hỗ trợ đa hình, kế thừa.  
+Hỗ trợ Dictionary với Key là một class.  
+Hỗ trợ lồng nhiều kiểu dữ liệu.  
 
 ## Build
+Đã pass: **692/692** testcases.  
+Phiên bản: **.NET Standard 2.0**  
 
-Passed: **692/692** test cases.  
-Version: **.NET Standard 2.0**  
-
------
-
-## These are some real-world test cases that have passed
+## Đây là một số tests theo nhu cầu thực tế đã pass
 
 ```
-TEST CASE 1: Handling Circular Reference.
-TEST CASE 2: Handling Inheritance and Polymorphism (Restoring subclass type).
-TEST CASE 3: Handling Nulls, Empty Lists, and Decimal/DateTime Precision.
-TEST CASE 5: Using DEEP nested structures (Recursion limit check).
-TEST CASE 6: Handling Dictionary with a Class Key (Non-primitive Key).
-TEST CASE 8: Serialization/Deserialization via Interface (Restoring actual type).
-TEST CASE 9: Using a combination of List nested within a List and Default Values.
-TEST CASE 10: Handling rare/difficult .NET Data Types (TimeSpan, Tuple, HashSet, 4-byte Unicode).
-TEST CASE 13: Handling Duplicate Object Reference.
-TEST CASE 14: Duplicate Reference in Collection.
-TEST CASE 16: Using Nested NULL Data and Inheritance.
-TEST CASE 18: Polymorphism in Collection (Restoring actual type of each item).
-TEST CASE 19: Dictionary with Struct Value.
-TEST CASE 20: Property with Object type (Maximum polymorphism).
+TEST CASE 1: Xử lý Tham chiếu Vòng tròn (Circular Reference).
+TEST CASE 2: Xử lý Kế thừa và Đa hình (Khôi phục kiểu lớp con).
+TEST CASE 3: Xử lý Null, List rỗng, và Số thập phân/DateTime chính xác.
+TEST CASE 5: Bằng cấu trúc lồng ghép SÂU (Kiểm tra giới hạn đệ quy).
+TEST CASE 6: Xử lý Dictionary với Key là một Class (Non-primitive Key).
+TEST CASE 8: Serialization/Deserialization qua Interface (Khôi phục kiểu thực tế).
+TEST CASE 9: Bằng việc kết hợp List lồng List và Giá trị Default.
+TEST CASE 10: Xử lý các Kiểu Dữ liệu .NET hiếm/khó (TimeSpan, Tuple, HashSet, Unicode 4-byte).
+TEST CASE 13: Xử lý Tham chiếu Trùng lặp (Duplicate Object Reference).
+TEST CASE 14: Tham chiếu Trùng lặp trong Collection.
+TEST CASE 16: Bằng Dữ liệu NULL Lồng ghép và Kế thừa.
+TEST CASE 18: Đa hình trong Collection (Khôi phục kiểu thực tế từng item).
+TEST CASE 19: Dictionary với Value là Struct.
+TEST CASE 20: Thuộc tính có kiểu Object (Đa hình tối đa).
 ...
 ```
 
------
-
-## How to use
+## Cách sử dụng
 
 ```
 var bin = BinConverter.GetBytes(target);
 var item = BinConverter.GetItem<ItemType>(bin);
 ```
 
------
+## Hiệu năng so với JsonSerializer
 
-## Performance comparison with JsonSerializer
-
-### Get bytes
+### Lấy bytes
 
 | Method                           | Mean         | Error        | StdDev       | Median       | Gen0    | Gen1   | Allocated |
 |--------------------------------- |-------------:|-------------:|-------------:|-------------:|--------:|-------:|----------:|
@@ -81,7 +71,7 @@ var item = BinConverter.GetItem<ItemType>(bin);
 | GetBytes_ArrayOfPrimitives       | 86,718.33 ns | 1,385.149 ns | 1,482.094 ns | 86,772.27 ns | 10.6201 | 0.3662 |   88944 B |
 | JsonSerializer_ArrayOfPrimitives | 18,335.04 ns |   361.243 ns |   386.525 ns | 18,261.74 ns |  1.3123 |      - |   10992 B |
 
-### Get item
+### Lấy item
 
 | Method                            | Mean          | Error        | StdDev       | Gen0    | Gen1   | Allocated |
 |---------------------------------- |--------------:|-------------:|-------------:|--------:|-------:|----------:|
@@ -104,7 +94,7 @@ var item = BinConverter.GetItem<ItemType>(bin);
 | GetItem_ArrayOfPrimitives         |  26,434.80 ns |   521.064 ns |   730.459 ns |  8.4534 | 0.2747 |   70720 B |
 | JsonDeserialize_ArrayOfPrimitives |  47,628.61 ns |   493.229 ns |   411.869 ns |  1.4648 |      - |   12448 B |
 
-### Output bytes size
+### Kích thước bytes output
 
 |Object                   |bin converter  |bytes     |  percent|   >   |json converter |bytes     |  percent
 |-------------------------|---------------|----------|---------|-------|---------------|----------|---------
